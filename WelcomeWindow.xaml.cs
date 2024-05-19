@@ -15,28 +15,26 @@ using System.Windows.Shapes;
 namespace OOP_Dankov
 {
     /// <summary>
-    /// Логика взаимодействия для ConfirmationWindow.xaml
+    /// Логика взаимодействия для WelcomeWindow.xaml
     /// </summary>
-    public partial class ConfirmationWindow : Window
+    public partial class WelcomeWindow : Window
     {
         /// <summary>
-        /// Конструктор окна подтверждения
+        /// Конструктор окна приветствия
         /// </summary>
-        /// <param name="text">Текст,отображемый в окне</param>
-        public ConfirmationWindow(string text)
+        public WelcomeWindow()
         {
             InitializeComponent();
-            ConfirmLabel.Content = text;
         }
 
         /// <summary>
-        /// Обработчик нажатия на кнопку подтверждения
+        /// Обработчик нажатия на кнопку "Перейти к приложению"
         /// </summary>
         /// <param name="sender">Объект-отправитель</param>
         /// <param name="e">Аргументы</param>
-        private void YesButton_Click(object sender, RoutedEventArgs e)
+        private void CloseWelcomeWindow_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            this.Close();
         }
     }
 }

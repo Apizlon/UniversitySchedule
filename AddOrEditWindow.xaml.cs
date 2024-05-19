@@ -19,8 +19,16 @@ namespace OOP_Dankov
     /// </summary>
     public partial class AddOrEditWindow : Window
     {
+        /// <summary>
+        /// Локальный объект занятия
+        /// </summary>
         public Lesson LocalLesson { get; private set; }
 
+        /// <summary>
+        /// Конструктор окна добавления изменения
+        /// </summary>
+        /// <param name="lesson">Объект занятия</param>
+        /// <param name="type">Тип запроса(добавление/изменение)</param>
         public AddOrEditWindow(Lesson lesson, RequestType type)
         {
             InitializeComponent();
@@ -39,6 +47,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки отправления
+        /// </summary>
+        /// <param name="sender">Объект-тправитель</param>
+        /// <param name="e">Аргументы</param>
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -60,6 +73,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Конвертер выбранного индекса во время
+        /// </summary>
+        /// <param name="selectedIndex">Выбранный индекс</param>
+        /// <returns>Кортеж со временем(часы,минуты)</returns>
         private (int, int) GetTime(int selectedIndex)
         {
             switch (selectedIndex)
@@ -74,6 +92,12 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Конвертер времени в индекс
+        /// </summary>
+        /// <param name="h">часы</param>
+        /// <param name="m">минуты</param>
+        /// <returns>Выбранный индекс</returns>
         private int GetTimeIndex(int h, int m)
         {
             switch (h, m)
@@ -88,6 +112,10 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Валидация полей
+        /// </summary>
+        /// <exception cref="Exception">ошибка валидации</exception>
         private void ValidateData()
         {
             // Регулярные выражения

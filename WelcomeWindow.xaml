@@ -1,0 +1,28 @@
+﻿<Window x:Class="OOP_Dankov.WelcomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOP_Dankov"
+        mc:Ignorable="d" Height="446" Width="415" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="NoResize" WindowStyle="ToolWindow" Icon="/schedule.png">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFF0EDF1" Offset="1"/>
+                <GradientStop Color="#FF9D6CBB" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="CloseWelcomeWindow" Content="Перейти к приложению" HorizontalAlignment="Center" Margin="0,366,0,0" VerticalAlignment="Top" Height="39" Width="146" Click="CloseWelcomeWindow_Click"/>
+        <Image HorizontalAlignment="Center" Height="170" Margin="0,156,0,0" VerticalAlignment="Top" Width="172" Source="/schedule.png" RenderTransformOrigin="0.725,0.299"/>
+        <TextBlock Text="Расписание занятий в университете"
+           TextAlignment="Center" VerticalAlignment="Top" 
+           FontSize="16" FontWeight="Bold"
+           Margin="0,47,0,0"
+           TextWrapping="Wrap"/>
+        <TextBlock Text="Приложение разработал студент гр 22ВП2 Данков Дмитрий (15 вариант)"
+                   TextAlignment="Center" VerticalAlignment="Top" 
+                   FontSize="16" FontWeight="Bold"
+                   Margin="0,89,0,0"
+                   TextWrapping="Wrap"/>
+    </Grid>
+</Window>

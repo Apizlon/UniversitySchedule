@@ -18,23 +18,40 @@ using System.Windows.Shapes;
 namespace OOP_Dankov
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия с MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Контекст для взаимодействия с базой данных
+        /// </summary>
         ApplicationContext db = new ApplicationContext();
+
+        /// <summary>
+        /// Конструктор основного окна
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             db.Database.EnsureCreated();
         }
 
+        /// <summary>
+        /// Обработчик загрузки основного окна
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void MainWindowLoaded(object sender, RoutedEventArgs e)
         {
             UpdateLessonGrid();
             SearchComboBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку добавления записи
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -60,6 +77,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку удаления базы данных
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void DeleteDataBaseButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -96,13 +118,17 @@ namespace OOP_Dankov
 
         }
 
-
-
+        /// <summary>
+        /// Создание новой базы данных
+        /// </summary>
         private void CreateNewDataBase()
         {
             db.Database.EnsureCreated();
         }
 
+        /// <summary>
+        /// Обновление основной таблицы с данными
+        /// </summary>
         private void UpdateLessonGrid()
         {
             db.Lessons.Load();
@@ -111,6 +137,11 @@ namespace OOP_Dankov
             LessonsGrid.Items.Refresh();
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку создания базы данных
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void CreateDataBaseButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -132,6 +163,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку сохранения базы данных
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void SaveDataBaseButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -173,6 +209,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку выхода
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -189,6 +230,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку открытия базы данных из файла
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void OpenDataBaseFileButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -222,17 +268,29 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Проверка на существование базы данных
+        /// </summary>
+        /// <returns>true,если база данных создана, иначе - false</returns>
         private bool IsDatabaseCreated()
         {
             return db.Database.CanConnect();
         }
 
+        /// <summary>
+        /// Сохранение базы данных в файл
+        /// </summary>
         private void EnsureImmediateWrite()
         {
             db.ExecuteSql("PRAGMA wal_checkpoint(FULL);");
             db.ExecuteSql("PRAGMA synchronous=FULL;");
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку редактирования
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void EditMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show(((Lesson)LessonsGrid.SelectedItem).ID.ToString());
@@ -260,6 +318,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку удаления
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show(((Lesson)LessonsGrid.SelectedItem).ID.ToString());
@@ -286,6 +349,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик изменений в поле поиска
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void SearchTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -321,6 +389,11 @@ namespace OOP_Dankov
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку загрузки данных из Excel таблицы
+        /// </summary>
+        /// <param name="sender">Объект-отправитель</param>
+        /// <param name="e">Аргументы</param>
         private void LoadFromExcelButton_Click(object sender, RoutedEventArgs e)
         {
             try
