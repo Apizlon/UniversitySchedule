@@ -67,7 +67,6 @@ namespace OOP_Dankov
                     db.Lessons.Add(lesson);
                     db.SaveChanges();
                     EnsureImmediateWrite();
-                    //db = new ApplicationContext();
                     UpdateLessonGrid();
                 }
             }
@@ -93,14 +92,6 @@ namespace OOP_Dankov
                     {
                         db.Lessons.RemoveRange(db.Lessons);
                         db.SaveChanges();
-                        //db.Database.EnsureDeleted();
-                        //File.Delete("lessons.db");
-                        //MessageBox.Show("База данных успешно удалена");
-                        /*using (ApplicationContext ddddd = new ApplicationContext())
-                        {
-                            bool isDeleted = ddddd.Database.EnsureDeleted();
-                            MessageBox.Show(isDeleted ? "База данных успешно удалена!" : "Невозможно удалить базу данных, т.к. она не существует!");
-                        }*/
                         db.Database.EnsureDeleted();
                         MessageBox.Show("База данных успешно удалена!");
                         LessonsGrid.ItemsSource = null;
@@ -176,15 +167,6 @@ namespace OOP_Dankov
                 {
                     throw new Exception("Ошибка!Необходимо создать базу данных!");
                 }
-                /*db.Lessons.Load();
-                db.UpdateRange(db.Lessons);
-                db.Lessons.UpdateRange(db.Lessons);
-                db.SaveChanges();
-                db.Dispose();
-                db = new ApplicationContext();
-                
-                db.SaveChanges();
-                db.Lessons.Load();*/
                 db.SaveChanges();
                 string sourceFilePath = "lessons.db";
 
@@ -293,7 +275,6 @@ namespace OOP_Dankov
         /// <param name="e">Аргументы</param>
         private void EditMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(((Lesson)LessonsGrid.SelectedItem).ID.ToString());
             try
             {
                 if (LessonsGrid.SelectedItem == null)
@@ -325,7 +306,6 @@ namespace OOP_Dankov
         /// <param name="e">Аргументы</param>
         private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(((Lesson)LessonsGrid.SelectedItem).ID.ToString());
             try
             {
                 if (LessonsGrid.SelectedItem == null)
@@ -422,20 +402,11 @@ namespace OOP_Dankov
                             Lesson lesson = new Lesson
                             {
                                 LessonName = worksheet.Cells[row, 1].Text,
-                                //DateAndTime = DateTime.Parse(worksheet.Cells[row, 2].Text),
                                 Teacher = worksheet.Cells[row, 3].Text,
                                 Auditorium = worksheet.Cells[row, 4].Text,
                                 GroupName = worksheet.Cells[row, 5].Text,
                                 TypeOfLesson = (LessonType)Enum.Parse(typeof(LessonType), worksheet.Cells[row, 6].Text)
                             };
-                            //MessageBox.Show(worksheet.Cells[row, 2].Text);
-                            /*if (DateTime.TryParseExact(worksheet.Cells[row, 2].Text, "M.d.yy  H:mm",
-                                            CultureInfo.InvariantCulture,
-                                            DateTimeStyles.None,
-                                            out DateTime dateAndTime))
-                            {
-                                lesson.DateAndTime = dateAndTime;
-                            }*/
                             string dateAndTimeText = worksheet.Cells[row, 2].Text;
                             string dateFormat = "M.d.yy H:mm";
 
@@ -445,20 +416,9 @@ namespace OOP_Dankov
                             }
                             else
                             {
-                                //throw new Exception("Ошибка чтения даты/времени\n" + worksheet.Cells[row, 2].Text);
                                 MessageBox.Show("Ошибка чтения даты/времени\n" + worksheet.Cells[row, 2].Text);
                                 break;
                             }
-                            /*string dateAndTimeText = worksheet.Cells[row, 2].Text;
-                            string[] dateFormats = { "yyyy-MM-dd HH:mm:ss", "dd.MM.yyyy HH:mm", "MM/dd/yyyy HH:mm", "yyyy-MM-ddTHH:mm:ss","m.d.yyyy H:mm" };
-
-                            if (DateTime.TryParseExact(dateAndTimeText, dateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateAndTime))
-                            {
-                                lesson.DateAndTime = dateAndTime;
-                            } else
-                            {
-                                throw new Exception("Ошибка чтения даты/времени\n"+worksheet.Cells[row, 2].Text);
-                            }*/
                             db.Lessons.Add(lesson);
                         }
 
